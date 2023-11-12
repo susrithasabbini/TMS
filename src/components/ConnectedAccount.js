@@ -120,19 +120,19 @@ const ConnectedAccount = ({ currentAccount, contractInstance, isVoter }) => {
               Exit DAO?
             </Text>
           )}
-          {currentAccount === constants.ownerAddress && (
+          {currentAccount === constants.ownerAddress ? (
             <Box className="text-base w-fit font-semibold text-green-500 border border-green-500 p-2 rounded">
               Owner
             </Box>
-          )}
-          {isVoter && (
+          ) : isVoter ? (
             <Box className="text-base w-fit font-semibold text-blue-500 border border-blue-500 p-2 rounded">
               DAO Member
             </Box>
+          ) : (
+            <Box className="text-base w-fit font-semibold text-rose-500 border border-rose-500 p-2 rounded">
+              Client
+            </Box>
           )}
-          <Box className="text-base w-fit font-semibold text-rose-500 border border-rose-500 p-2 rounded">
-            Client
-          </Box>
         </Flex>
       </CardBody>
     </Card>
