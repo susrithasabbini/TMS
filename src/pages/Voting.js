@@ -271,7 +271,7 @@ const Voting = ({
   };
 
   return (
-    <div className="flex flex-col items-center w-[100vw]">
+    <div className="flex flex-col items-center w-[95vw]">
       <ConnectedAccount
         currentAccount={currentAccount}
         contractInstance={contractInstance}

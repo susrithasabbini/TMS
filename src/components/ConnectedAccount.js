@@ -1,7 +1,16 @@
-import { Card, CardBody, Flex, Icon, Text, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardBody,
+  Flex,
+  Icon,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { ethers } from "ethers";
 import React from "react";
 import { SiBlockchaindotcom } from "react-icons/si";
+import constants from "../contract/constants";
 
 const ConnectedAccount = ({ currentAccount, contractInstance, isVoter }) => {
   const toast = useToast();
@@ -89,11 +98,13 @@ const ConnectedAccount = ({ currentAccount, contractInstance, isVoter }) => {
   return (
     <Card className="w-full">
       <CardBody>
-        <Flex alignItems="center" gap={4}>
-          <Icon as={SiBlockchaindotcom} color="blue.600" boxSize={10} />
-          <Text ml={3} className="text-gray-500 text-lg font-semibold">
-            Connected Account: {currentAccount}
-          </Text>
+        <Flex alignItems="center" justify="space-between">
+          <div className="flex items-center gap-3">
+            <Icon as={SiBlockchaindotcom} color="blue.600" boxSize={10} />
+            <Text className="text-gray-500 text-lg font-semibold">
+              Connected Account: {currentAccount}
+            </Text>
+          </div>
           {!isVoter ? (
             <Text
               className="text-sm font-thin cursor-pointer"
@@ -109,6 +120,19 @@ const ConnectedAccount = ({ currentAccount, contractInstance, isVoter }) => {
               Exit DAO?
             </Text>
           )}
+          {currentAccount === constants.ownerAddress && (
+            <Box className="text-base w-fit font-semibold text-green-500 border border-green-500 p-2 rounded">
+              Owner
+            </Box>
+          )}
+          {isVoter && (
+            <Box className="text-base w-fit font-semibold text-blue-500 border border-blue-500 p-2 rounded">
+              DAO Member
+            </Box>
+          )}
+          <Box className="text-base w-fit font-semibold text-rose-500 border border-rose-500 p-2 rounded">
+            Client
+          </Box>
         </Flex>
       </CardBody>
     </Card>
