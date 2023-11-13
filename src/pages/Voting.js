@@ -69,7 +69,7 @@ const Voting = ({
 
   useEffect(() => {
     const fetchIsVoted = async () => {
-      if (contractInstance && currentAccount) {
+      if (payment && contractInstance && currentAccount) {
         try {
           const isVoted = await contractInstance.hasAlreadyVoted(
             payment,
@@ -190,7 +190,7 @@ const Voting = ({
       });
 
       toast.promise(promise, {
-        loading: { title: "Ending Voting...", position: "top" },
+        loading: { title: " Voting...", position: "top" },
         success: {
           title: "Success",
           description: "Voting ended successfully!",
@@ -310,7 +310,7 @@ const Voting = ({
           onClick={() => endVoting()}
           _hover={{ backgroundColor: "red.500" }}
         >
-          Stop Voting
+          End Voting
         </Button>
       )}
 
@@ -406,11 +406,21 @@ const Voting = ({
                       {payment &&
                       payment.votedYes.length > payment.votedNo.length ? (
                         <span className="text-green-600 font-bold text-lg">
-                          Yes
+                          Yes (Risk:{" "}
+                          {(payment.votedYes.length /
+                            (payment.votedYes.length +
+                              payment.votedNo.length)) *
+                            100}
+                          {"%"})
                         </span>
                       ) : (
                         <span className="text-red-600 font-bold text-lg">
-                          No
+                          No (Risk:{" "}
+                          {(payment.votedYes.length /
+                            (payment.votedYes.length +
+                              payment.votedNo.length)) *
+                            100}
+                          {"%"})
                         </span>
                       )}
                     </Text>
