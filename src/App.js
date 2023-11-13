@@ -65,6 +65,9 @@ function App() {
     const loadBlockchainData = async () => {
       if (typeof window.ethereum !== "undefined") {
         try {
+          // Requesting access to user accounts from MetaMask
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+
           const provider = new ethers.providers.Web3Provider(window.ethereum);
           const signer = provider.getSigner();
           const contract = new ethers.Contract(
