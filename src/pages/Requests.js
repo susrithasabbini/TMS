@@ -52,12 +52,12 @@ const Requests = ({
 
   const handleAcceptPayment = async (paymentId) => {
     if (contractInstance && currentAccount) {
-      const payment = requests[paymentId];
+      const request = requests.filter((request) => request.id === paymentId)[0];
       if (
-        (payment.value >= ethers.utils.parseEther("0.02") &&
-          payment.votedYes.length === 0) ||
-        (payment.from === constants.ownerAddress &&
-          payment.votedYes.length === 0)
+        (request.value >= ethers.utils.parseEther("0.02") &&
+          request.votedYes.length === 0) ||
+        (request.from === constants.ownerAddress &&
+          request.votedYes.length === 0)
       ) {
         // Show warning toast
         toast({
@@ -80,6 +80,21 @@ const Requests = ({
         } catch (error) {
           console.error("Error accepting order: ", error);
           reject("Error accepting order");
+          if (
+            error.message.includes(
+              "Start the voting process to accept this Payment"
+            )
+          ) {
+            toast({
+              title: "Attention",
+              description: "Start voting to accept this order.",
+              position: "top",
+              status: "warning",
+              duration: 2000,
+              isClosable: true,
+            });
+            return;
+          }
         }
       });
 
