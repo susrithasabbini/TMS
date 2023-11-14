@@ -406,7 +406,7 @@ const Voting = ({
                       {payment &&
                       payment.votedYes.length > payment.votedNo.length ? (
                         <span className="text-green-600 font-bold text-lg">
-                          Yes (Risk:{" "}
+                          Yes (No Risk:{" "}
                           {(payment.votedYes.length /
                             (payment.votedYes.length +
                               payment.votedNo.length)) *
@@ -416,7 +416,7 @@ const Voting = ({
                       ) : (
                         <span className="text-red-600 font-bold text-lg">
                           No (Risk:{" "}
-                          {(payment.votedYes.length /
+                          {(payment.votedNo.length /
                             (payment.votedYes.length +
                               payment.votedNo.length)) *
                             100}
