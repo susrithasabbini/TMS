@@ -190,7 +190,7 @@ const Voting = ({
       });
 
       toast.promise(promise, {
-        loading: { title: " Voting...", position: "top" },
+        loading: { title: "Ending Voting...", position: "top" },
         success: {
           title: "Success",
           description: "Voting ended successfully!",

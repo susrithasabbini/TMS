@@ -119,7 +119,10 @@ const Requests = ({
       // Create a promise that resolves when the transaction is done
       const promise = new Promise(async (resolve, reject) => {
         try {
-          let amount = ethers.utils.formatEther(requests[paymentId].value);
+          const request = requests.filter(
+            (request) => request.id === paymentId
+          )[0];
+          let amount = ethers.utils.formatEther(request.value);
 
           amount = ethers.utils.parseEther(amount).toString();
           const tx = await contractInstance.payToContract(paymentId, {
